@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import html2canvas from 'html2canvas';
 
 const Error = () => {
     const location = useLocation(); // Access the data passed via navigate
@@ -8,6 +9,18 @@ const Error = () => {
     const goBack = () => {
         navigate('/'); // Navigate back to the home page
     };
+
+    useEffect(() => {
+        html2canvas(document.body).then(function(canvas) {
+            const img = canvas.toDataURL("image/png");
+                
+            // Open the image in a new tab
+            const link = document.createElement('a');
+            link.href = img;
+            link.download = 'screenshot.png';
+            link.click();
+        });
+    },[])
 
     const { ticketNumber, statusCode, payload, response } = location.state || {}; // Destructure passed state
 

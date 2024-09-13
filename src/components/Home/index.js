@@ -2,6 +2,8 @@
 
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import html2canvas from 'html2canvas';
+
 
 const Home = () => {
     const [errorMessage, setErrorMessage] = useState(''); // State for error message
@@ -9,6 +11,8 @@ const Home = () => {
     const [bugTickets, setBugTickets] = useState([]); // State to manage the bug tickets list
     const [apidata, setapidata]  =  useState(null);
     const navigate = useNavigate();
+
+
 
     const showErrorPopup = (message) => {
         setErrorMessage(message); // Set the error message
@@ -31,6 +35,15 @@ const Home = () => {
                 payload: JSON.stringify(apidata.payload), // Payload sent
                 response: JSON.stringify(apidata.data), // Response received
             },
+        });
+        html2canvas(document.body).then(function(canvas) {
+            const img = canvas.toDataURL("image/png");
+                
+            // Open the image in a new tab
+            const link = document.createElement('a');
+            link.href = img;
+            link.download = 'screenshot.png';
+            link.click();
         });
     };
 
@@ -57,29 +70,37 @@ const Home = () => {
             alert('API call successful');
         }
         } catch (error) {
-        showErrorPopup(`Error: ${error.message}`);
+            showErrorPopup(`Error: ${error.message}`);
         }
     };
 
     return (
         <div>
             <header className="App-header">
-            <h1>API Error Handling Example</h1>
+                <h1>API Error Handling</h1>
             </header>
 
-            <button type="button" onClick={callApi}>
-                Call API
-            </button>
+            <div className="apiButton">
+                <button className="btn btn-primary" type="button" onClick={callApi}>
+                    Call API
+                </button>
+            </div>
+            
 
             {errorModal && (
-                <div style={{ backgroundColor: 'lightcoral', padding: '20px', borderRadius: '5px' }}>
-                <p>{errorMessage}</p>
-                <button onClick={() => createBugTicket()}>Yes</button>
-                <button onClick={closePopup}>No</button>
+                <div className="modalContailer">
+                    <div className="modalContent">
+                        <div className="contentBlock">
+                            <div className="modalTitle">API status</div>
+                            <p>{errorMessage}</p>
+                        </div>
+                        <div className="btnBlock">
+                            <button className="btn btn-primary" onClick={() => createBugTicket()}>Yes</button>
+                            <button className="btn btn-primary" onClick={closePopup}>No</button>
+                        </div>
+                    </div>
                 </div>
             )}
-
-            <h2>Bug Tickets</h2>
             <ul>
                 {bugTickets.map((ticket, index) => (
                 <li key={index}>{ticket}</li>

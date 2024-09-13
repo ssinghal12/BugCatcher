@@ -13,14 +13,22 @@ const Error = () => {
 
     return (
         <div>
-            <h1>Error Page</h1>
-            <div style={{ padding: '20px', border: '1px solid red', borderRadius: '10px', backgroundColor: 'lightyellow' }}>
-                <p><strong>Ticket Number:</strong> {ticketNumber}</p>
-                <p><strong>Status Code:</strong> {statusCode}</p>
-                <p><strong>Payload Sent:</strong> {payload}</p>
-                <p><strong>Response Received:</strong> {response}</p>
-            </div>
-            <button onClick={goBack} style={{ marginTop: '20px' }}>Go Back</button>
+            <header className="App-header">
+                <h1>Error Page</h1>
+            </header>
+            <div className="container">
+                <div className="erroeContent">
+                    <div className="erroePage">
+                        <p><strong>Ticket Number:</strong> {ticketNumber}</p>
+                        <p><strong>Status Code:</strong> {statusCode}</p>
+                        <p><strong>Payload Sent:</strong> {payload}</p>
+                        <p><strong>Response Received:</strong> {response}</p>
+                    </div>
+                    <div className="btnBlock">
+                        <button className="btn btn-primary" onClick={goBack}>Go Back</button>
+                    </div>
+                </div>
+            </div>  
         </div>
     );
 };

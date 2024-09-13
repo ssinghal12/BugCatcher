@@ -3,7 +3,6 @@
 }
 
 .App-logo {
-  height: 40vmin;
   pointer-events: none;
 }
 
@@ -15,13 +14,13 @@
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  font-size: 20px;
   color: white;
+  margin-bottom: 20px;
 }
 
 .App-link {
@@ -36,3 +35,100 @@
     transform: rotate(360deg);
   }
 }
+
+.modalContailer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, .2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+.modalContent {
+    width: 500px;
+    max-width: 90%;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    box-shadow: 1px 3px 4px rgba(0, 0, 0, .5);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    max-height: 40vh;
+}
+.contentBlock {
+    flex-grow: 1;
+}
+.modalTitle {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.apiButton {
+    padding: 100px 0;
+    display: flex;
+    justify-content: center; 
+}
+
+.apiButton .btn {
+    padding: 10px 40px;
+}
+
+.container {
+    width: 100%;
+    max-width: 1147px;
+    margin: 0 auto;
+}
+
+.btn {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0 6px;
+    border-radius: 6px;
+    background: 0 0;
+    cursor: pointer;
+    font-weight: 500;
+    outline: 0;
+    touch-action: manipulation;
+    transition: all 200ms ease;
+    user-select: none;
+}
+
+.btn-primary {
+    background: #006efa;
+    border: 1px solid #006efa;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, .1);
+    color: #fff;
+    margin-left: 0 !important;
+    min-height: 36px;
+    padding: 2px 22px;
+    font-size: 16px;
+    line-height: 1.57;
+}
+
+.btnBlock {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.erroeContent {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.erroePage {
+    padding: 20px;
+    border: 1px solid red;
+    background-color: lightyellow;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+

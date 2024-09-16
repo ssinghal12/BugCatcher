@@ -3,6 +3,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import html2canvas from 'html2canvas';
+// import { image } from 'html2canvas-pro/dist/types/css/types/image';
+//import html2canvas from 'html2canvas';
+
+
+
 
 
 const Home = () => {
@@ -36,14 +41,48 @@ const Home = () => {
                 response: JSON.stringify(apidata.data), // Response received
             },
         });
-        html2canvas(document.body).then(function(canvas) {
+        html2canvas(document.body, {scale: 0.5}).then(function(canvas) {
+            
             const img = canvas.toDataURL("image/png");
+            const img1 = canvas.toDataURL("image1/png")
                 
             // Open the image in a new tab
             const link = document.createElement('a');
             link.href = img;
-            link.download = 'screenshot.png';
+            link.download = 'image/png';
             link.click();
+
+            fetch('http://localhost:3001/send-email', {  // Replace with your server URL
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    to: 'sajcool2012@gmail.com', // Specify the recipient's email
+                    subject: 'Bug Report Screenshot',
+                    text: 'Attached is the screenshot of the bug report.' ,
+                    image: img, // Base64 image of the screenshot
+                    img1 : img,
+                 apiPayload: apidata.payload  // The API payload
+
+                    // Send the base64 image
+                }),
+            })
+            .then(response => {
+                if (!response.ok) {
+                    // Handle HTTP errors (like 404 or 500)
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json(); // Parse the JSON response
+            })
+            .then(data => {
+                console.log('Data:', data); // Handle the response data
+            })
+            .catch(error => {
+                // Handle network errors or other issues
+                console.log('Fetch Error:', error);
+                alert('An error occurred while fetching the data.');
+            });
         });
     };
 

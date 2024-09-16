@@ -1,22 +1,22 @@
 const express = require('express');
 const nodemailer = require('nodemailer');
-const cors = require('cors'); // Import cors
+const cors = require('cors'); 
 const bodyParser = require('body-parser');
 
 const app = express();
 app.use(bodyParser.json());
-app.use(cors()); // Enable CORS for all routes
+app.use(cors()); 
 
-app.use(bodyParser.json({ limit: '10mb' })); // Adjust the limit as needed
+app.use(bodyParser.json({ limit: '10mb' })); 
 app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
 
 
-// Nodemailer configuration
+
 const transporter = nodemailer.createTransport({
-    service: 'gmail', // Or use another email service
+    service: 'gmail', 
     auth: {
-        user: 'suraj.singhal@ofbusiness.in',  // Replace with your email
-        pass: 'fsiz flzp abxt kvxd',   // Replace with your email password or app password
+        user: 'suraj.singhal@ofbusiness.in',  
+        pass: 'fsiz flzp abxt kvxd',   
     },
 });
 
@@ -25,7 +25,7 @@ app.post('/send-email', (req, res) => {
 
     console.log("something happened");
     const mailOptions = {
-        from: 'suraj.singhal@ofbusiness.in', // Replace with your email
+        from: 'suraj.singhal@ofbusiness.in', 
         to,
         subject,
         text,
